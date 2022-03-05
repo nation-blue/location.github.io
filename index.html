@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title></title>
+</head>
+<body>
+	
+</body>
+</html>
+<script type="text/javascript">
+	window._AMapSecurityConfig = {
+		securityJsCode:'2f3299921c4a1bcbe270eacd5afd057d',
+	}
+</script>
+<script src="https://webapi.amap.com/maps?v=2.0&key=407b315fd0ce058fd26219fabcb93bd4&callback=mapInit"></script>
+<script>
+	window.mapInit = function(){
+		// var AMap = new AMap.Map('container');
+		AMap.plugin('AMap.Geolocation', function() {
+		  var geolocation = new AMap.Geolocation({
+		    // 是否使用高精度定位，默认：true
+		    enableHighAccuracy: true,
+		    // 设置定位超时时间，默认：无穷大
+		    timeout: 10000,
+			// noIpLocate:0, //0-3
+			// noGeoLocation:0, //0-3
+		  })
+		
+		  geolocation.getCurrentPosition()
+		  AMap.event.addListener(geolocation, 'complete', onComplete)
+		  AMap.event.addListener(geolocation, 'error', onError)
+		
+		  function onComplete (data) {
+		    // data是具体的定位信息
+			// console.log(data);
+			// that.latitude = data.position.lat;
+			// that.longitude = data.position.lng;
+			// that.accuracy = data.accuracy;
+			// that.location_type = data.location_type;
+			// that.formattedAddress = data.formattedAddress;
+			// that.distance(that.latitude, that.longitude, that.siteDetail.latitude, that.siteDetail.longitude)
+			alert(JSON.stringify(data))
+		  }
+		
+		  function onError (data) {
+		    // 定位出错
+			// console.log(data);
+			alert(JSON.stringify(data))
+		  }
+		})
+	}
+</script>
